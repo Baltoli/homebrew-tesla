@@ -33,8 +33,8 @@ class Tesla < Formula
   depends_on "protobuf"
 
   def install
-    cmake_args = ["-DLLVM_DIR=#{Formula["llvm"].opt_lib}/cmake/llvm",
-                  "-DCMAKE_INCLUDE_PATH=#{Formula["protobuf"].opt_include}"]
+    cmake_args = ["-DLLVM_DIR=#{Formula["llvm"].lib}/cmake/llvm",
+                  "-DCMAKE_INCLUDE_PATH=#{Formula["protobuf"].include}"]
 
     mkdir "build" do
       system "cmake", "..", *cmake_args, *std_cmake_args
@@ -44,7 +44,7 @@ class Tesla < Formula
 
   test do
     TESLA = "#{bin}/tesla"
-    CLANG = "#{Formula["llvm"].opt_bin}/clang"
+    CLANG = "#{Formula["llvm"].bin}/clang"
     (testpath/"test.c").write(TEST_C)
 
     system TESLA, "analyse", (testpath/"test.c"), "-o", "test.tesla", "--"
