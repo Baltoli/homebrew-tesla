@@ -26,6 +26,9 @@ class Tesla < Formula
   desc "Temporal assertions with static analysis"
   homepage "http://baltoli.github.io"
   head "https://github.com/cadets/tesla-static-analysis.git"
+  url "https://github.com/cadets/tesla-static-analysis/releases/download/v0.1-pre/tesla-0.1.tar.gz"
+  sha256 "d229bc948cde193ebb227130317b9d2ab5061ad09e5c241244f4100fb74e1072"
+  version "0.1"
 
   depends_on "cmake" => :build
   depends_on "llvm" => "with-clang"
