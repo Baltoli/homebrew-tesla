@@ -21,17 +21,17 @@ int main(void) {
   bar();
 }
 HERE
+         .freeze
 
 class Tesla < Formula
   desc "Temporal assertions with static analysis"
-  homepage "http://baltoli.github.io"
-  head "https://github.com/cadets/tesla-static-analysis.git"
+  homepage "https://baltoli.github.io"
   url "https://github.com/cadets/tesla-static-analysis/releases/download/v0.1-pre/tesla-0.1.tar.gz"
   sha256 "d229bc948cde193ebb227130317b9d2ab5061ad09e5c241244f4100fb74e1072"
-  version "0.1"
+  head "https://github.com/cadets/tesla-static-analysis.git"
 
   depends_on "cmake" => :build
-  depends_on "llvm" => "with-clang"
+  depends_on "llvm"
   depends_on "z3"
   depends_on "protobuf"
 
@@ -46,8 +46,8 @@ class Tesla < Formula
   end
 
   test do
-    TESLA = "#{bin}/tesla"
-    CLANG = "#{Formula["llvm"].bin}/clang"
+    TESLA = "#{bin}/tesla".freeze
+    CLANG = "#{Formula["llvm"].bin}/clang".freeze
     (testpath/"test.c").write(TEST_C)
 
     system TESLA, "analyse", (testpath/"test.c"), "-o", "test.tesla", "--"
