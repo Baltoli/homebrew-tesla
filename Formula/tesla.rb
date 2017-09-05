@@ -51,7 +51,7 @@ class Tesla < Formula
   end
 
   test do
-    TESLA = "#{bin}/tesla".freeze
+    TESLA = "OPT=#{Formula["llvm"].bin}/opt #{bin}/tesla".freeze
     CLANG = "#{Formula["llvm"].bin}/clang".freeze
     (testpath/"test.c").write(TEST_C)
 
