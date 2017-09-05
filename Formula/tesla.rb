@@ -51,19 +51,20 @@ class Tesla < Formula
   end
 
   test do
-    TESLA = "OPT=#{Formula["llvm"].bin}/opt #{bin}/tesla".freeze
+    ENV["OPT"] = "#{Formula["llvm"].bin}/opt"
+    TESLA = "#{bin}/tesla".freeze
     CLANG = "#{Formula["llvm"].bin}/clang".freeze
     (testpath/"test.c").write(TEST_C)
 
     system TESLA, "analyse", (testpath/"test.c"), "-o", "test.tesla", "--"
     system TESLA, "cat", "test.tesla", "-o", "test.manifest"
     system CLANG, "-c", "-emit-llvm", "-o", "test.bc", (testpath/"test.c")
-    system TESLA, "instrument", "-tesla-manifest", "test.manifest", "test.bc", "-o", "test.instr.bc"
+    system TESLA, "instrument", "-tesla-manifest=test.manifest", "test.bc", "-o", "test.instr.bc"
     system CLANG, "test.instr.bc", "-ltesla", "-o", "test"
     system "./test"
 
-    system TESLA, "static", "test.manifest", "test.bc", "-mc", "-bound=10", "-o", "test.static.manifest"
-    system TESLA, "instrument", "-tesla-manifest", "test.static.manifest", "test.bc", "-o", "test.static.instr.bc"
+    system TESLA, "static", "-tesla-manifest=test.manifest", "test.bc"
+    system TESLA, "instrument", "-tesla-manifest=test.manifest", "test.bc", "-o", "test.static.instr.bc"
     system CLANG, "test.static.instr.bc", "-ltesla", "-o", "test.static"
     system "./test.static"
   end
