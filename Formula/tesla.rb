@@ -35,6 +35,11 @@ class Tesla < Formula
   depends_on "z3"
   depends_on "protobuf"
 
+  bottle do
+    root_url "https://github.com/cadets/tesla-static-analysis/releases/download/v0.2-pre/"
+    sha256 "d70827514f705ee32aa92261c742506461e94416ac4fc3b9a9510bb75c72289f" => :sierra
+  end
+
   def install
     cmake_args = ["-DLLVM_DIR=#{Formula["llvm"].lib}/cmake/llvm",
                   "-DCMAKE_INCLUDE_PATH=#{Formula["protobuf"].include}"]
