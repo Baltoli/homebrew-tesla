@@ -26,19 +26,14 @@ HERE
 class Tesla < Formula
   desc "Temporal assertions with static analysis"
   homepage "https://baltoli.github.io"
-  url "https://github.com/cadets/tesla-static-analysis/releases/download/v0.1-pre/tesla-0.1.tar.gz"
-  sha256 "d229bc948cde193ebb227130317b9d2ab5061ad09e5c241244f4100fb74e1072"
+  url "https://github.com/cadets/tesla-static-analysis/releases/download/v0.2-pre/tesla-0.2.tar.gz"
+  sha256 "3bf0fb926f64192cf39dde7fb5621041fcd6c5fc3ba0a3cd4715aa6f0fc59d73"
   head "https://github.com/cadets/tesla-static-analysis.git"
 
   depends_on "cmake" => :build
   depends_on "llvm"
   depends_on "z3"
   depends_on "protobuf"
-
-  bottle do
-    root_url "https://github.com/cadets/tesla-static-analysis/releases/download/v0.1-pre/"
-    sha256 "c2ed55dc38ffb9e49dcb4cb78b9a7e8a69f04850726e1034a3c541dd2ab444d4" => :sierra
-  end
 
   def install
     cmake_args = ["-DLLVM_DIR=#{Formula["llvm"].lib}/cmake/llvm",
