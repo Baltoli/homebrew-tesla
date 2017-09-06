@@ -51,7 +51,6 @@ class Tesla < Formula
   end
 
   test do
-    ENV["OPT"] = "#{Formula["llvm"].bin}/opt"
     TESLA = "#{bin}/tesla".freeze
     CLANG = "#{Formula["llvm"].bin}/clang".freeze
     (testpath/"test.c").write(TEST_C)
